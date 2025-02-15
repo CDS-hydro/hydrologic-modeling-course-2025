@@ -521,7 +521,7 @@ FLOW Linear Solver
   --> max change: dpmx=   2.9104E-11
 
  --> write tecplot output file: HW5_1a-003.tec
-      0.00 Seconds to write to Tecplot file(s)
+      0.01 Seconds to write to Tecplot file(s)
 
 == RICHARDS FLOW ===============================================================
   0 2r: 8.17E-17 2x: 0.00E+00 2u: 0.00E+00 ir: 2.55E-17 iu: 0.00E+00 rsn:   0
@@ -2324,14 +2324,14 @@ FLOW Linear Solver
   --> max change: dpmx=   0.0000E+00
 
  --> write tecplot output file: HW5_1a-004.tec
-      0.01 Seconds to write to Tecplot file(s)
+      0.04 Seconds to write to Tecplot file(s)
 
 PMCSubsurfaceFlow
- Total Time: 4.0015E-01 seconds
+ Total Time: 9.6598E-01 seconds
 
  FLOW TS SNES steps = 209  newton = 236  linear = 236  cuts = 0
  FLOW TS SNES Wasted Linear Iterations = 0
  FLOW TS SNES Wasted Newton Iterations = 0
- FLOW TS SNES time = 0.3 seconds
+ FLOW TS SNES time = 0.7 seconds
 
- Wall Clock Time:  2.0204E+00 [sec]   3.3674E-02 [min]   5.6124E-04 [hr]
+ Wall Clock Time:  5.5845E+00 [sec]   9.3074E-02 [min]   1.5512E-03 [hr]
