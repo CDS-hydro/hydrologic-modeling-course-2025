@@ -40,15 +40,6 @@ MATERIAL_PROPERTY soil1
   CHARACTERISTIC_CURVES cc1
 END
 
-MATERIAL_PROPERTY soil2
-  ID 2
-  POROSITY 0.3d0
-  PERMEABILITY
-    PERM_ISO 2.d-12
-  /
-  CHARACTERISTIC_CURVES cc2
-END
-
 #=========================== characteristic curves ============================
 CHARACTERISTIC_CURVES cc1
   SATURATION_FUNCTION VAN_GENUCHTEN
@@ -62,28 +53,15 @@ CHARACTERISTIC_CURVES cc1
   /
 END
 
-CHARACTERISTIC_CURVES cc2
-  SATURATION_FUNCTION VAN_GENUCHTEN
-    ALPHA 2.d-4
-    M 0.6d0
-    LIQUID_RESIDUAL_SATURATION 0.05d0
-  /
-  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
-    M 0.6d0
-    LIQUID_RESIDUAL_SATURATION 0.05d0
-  /
-END
-
 #=========================== output options ===================================
 OUTPUT
-  TIMES y 0.5 1. 2. 5.
-  PERIODIC_OBSERVATION TIMESTEP 1 #! print observation data at every timestep
+  TIMES y 0.01 0.1 1.0
   FORMAT TECPLOT POINT
 END
 
 #=========================== times ============================================
 TIME
-  FINAL_TIME 35.d0 y
+  FINAL_TIME 10.d0 y
   INITIAL_TIMESTEP_SIZE 1.d0 h
   MAXIMUM_TIMESTEP_SIZE 5.d-2 y
 END
@@ -112,24 +90,6 @@ REGION bottom
   /
 END
 
-REGION top_layer
-  COORDINATES
-    0.d0 0.d0 5.d0
-    1.d0 1.d0 10.d0
-  /
-END
-
-REGION bottom_layer
-  COORDINATES
-    0.d0 0.d0 0.d0
-    1.d0 1.d0 5.d0
-  /
-END
-
-REGION middle #! note the singular COORDINATE 
-COORDINATE 0.5d0 0.5d0 5.d0 # note the point is not at the grid center
-END
-
 #=========================== flow conditions ==================================
 FLOW_CONDITION initial_pressure
   TYPE
@@ -143,12 +103,7 @@ FLOW_CONDITION recharge
   TYPE
     LIQUID_FLUX NEUMANN
   /
-  LIQUID_FLUX LIST # use a list for transient dataset
-    TIME_UNITS y
-    DATA_UNITS cm/yr
-        0 100 # start pulse at 0. years
-        0.2 0 # end pulse at 0.2 years
-    / #!make sure to close out the list
+  LIQUID_FLUX 10.d0 cm/y
 END
 
 #=========================== condition couplers ===============================
@@ -168,21 +123,11 @@ BOUNDARY_CONDITION inlet
   REGION top
 END
 
-#=========================== Observations  ===============================
-OBSERVATION
-    REGION middle
-    VELOCITY #! print flow velocities
-END
-
 #=========================== stratigraphy couplers ============================
 STRATA
-  REGION top_layer
+  REGION all
   MATERIAL soil1
 END
 
-STRATA
-  REGION bottom_layer
-  MATERIAL soil2
-END
 
 END_SUBSURFACE
