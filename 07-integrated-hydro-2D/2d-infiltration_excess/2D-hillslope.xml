@@ -148,7 +148,7 @@
             <Parameter name="region" type="string" value="computational domain" />
             <Parameter name="components" type="Array(string)" value="{cell,face}" />
             <ParameterList name="function" type="ParameterList">
-                <!-- specify gradient for both the x and z direction so water table is at 0.5 m below surface -->
+                <!-- specify gradient for both the x and z direction so water table is at 1 m below surface -->
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="x0" type="Array(double)" value="{ 0, 0, 0,-1.}" />
                 <Parameter name="y0" type="double" value="101325" />
