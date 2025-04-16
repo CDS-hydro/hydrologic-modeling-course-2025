@@ -1,0 +1,9 @@
+Domain: 222 m x 1 m x 6.096 m
+assuming one soil material for whole domain (?)
+Bottom of domain will be an impermeable boundary (clay layer at ~20 ft (6.096 m) below ground surface)
+
+
+
+Currently only have subsurface flow set up (Richard's Equation)
+
+Lets use Brooks-Corey model for constitutive equation (better for coarse textured soils)
