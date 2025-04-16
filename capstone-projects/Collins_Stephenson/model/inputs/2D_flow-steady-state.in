@@ -1,4 +1,4 @@
-#Description: 2D RICHARDS  mode sloping water table with recharge
+#Description: 2D RICHARDS  mode sloping water table between Hyrum and Nibley Blacksmith Fork Canals and the Blacksmith Fork River
 
 SIMULATION
   SIMULATION_TYPE SUBSURFACE

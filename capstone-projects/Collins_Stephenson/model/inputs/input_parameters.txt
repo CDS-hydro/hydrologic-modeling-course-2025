@@ -1,9 +1,22 @@
-Domain: 222 m x 1 m x 6.096 m
-assuming one soil material for whole domain (?)
-Bottom of domain will be an impermeable boundary (clay layer at ~20 ft (6.096 m) below ground surface)
+# List of model inputs
+Domain: 222 m x 1 m x 6.1 m
+	- assume that local vertical datum is zero for z direction (z values in relation to local vertical datum)
+Starting resolution: 2 m x 1 m x 0.05 m
+Assuming homogenous and isotropic material 
+	- permeability k = 10e-6 $cm^2$ (assumption made based on permeability ranges for clean sands and gravel (Figure 32 - Woessner and Poeter, 2020)
+	- porosity n = 0.30 (assumption made based on recommended values for coarse sand and gravels (Table 2 - Woessner and Poeter, 2020)
+Boundaries
+	- bottom of domain will be an impermeable boundary (clay layer at ~20 ft (~6.1 m) below ground surface)
+	- canal side of domain will be a seepage boundary (have canal stage data that I will input as a text file to the transient model)
+	- river side of domain will be a seepage face boundary (have river stage data that I will input as a text file to the transient model)
+Initial conditions 
+	- water table at -3 m  below local vertical datum (based on current field observations)
+Time
+	- 1 year simulation time
 
 
+Planning to use Brooks-Corey model for saturation constitutive equation (better for coarse textured soils)
 
-Currently only have subsurface flow set up (Richard's Equation)
 
-Lets use Brooks-Corey model for constitutive equation (better for coarse textured soils)
+# References
+Woessner, William W. and Eileen P. Poeter 2020, Hydrogeologic Properties of Earth Materials and Principles of Groundwater Flow. The Groundwater Project, Guelph, Ontario, Canada.
