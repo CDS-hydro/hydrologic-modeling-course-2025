@@ -12,7 +12,8 @@ Boundaries
 Initial conditions 
 	- water table at -3 m  below local vertical datum (based on current field observations)
 Time
-	- 1 year simulation time
+	- steady state - long time (enough for model to stablize)
+	-1 year simulation time
 
 
 Planning to use Brooks-Corey model for saturation constitutive equation (better for coarse textured soils)

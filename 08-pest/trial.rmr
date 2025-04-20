@@ -1,0 +1,149 @@
+                     PEST RUN MANAGEMENT RECORD: CASE trial
+
+ AGENT DETAILS:-
+
+ Agent Name                  PAGENT Working Directory
+ ----------                  ------------------------
+ "pslave_0"                  ./pslave0/
+ "pslave_1"                  ./pslave1/
+ "pslave_2"                  ./pslave2/
+ "pslave_3"                  ./pslave3/
+
+
+ Attempting to communicate with agents ....
+
+ - agent "pslave_0" has been detected.
+ - agent "pslave_1" has been detected.
+ - agent "pslave_2" has been detected.
+ - agent "pslave_3" has been detected.
+
+
+ AGENT MODEL INPUT AND OUTPUT FILES:-
+
+ Agent "pslave_0" ----->
+
+     Model input files on agent "pslave_0":-
+         ./pslave0/pflotran.in
+
+     Model output files on agent "pslave_0":-
+         ./pslave0/output_processed.txt
+
+     Model command line for agent "pslave_0":-
+         trial.sh
+
+
+ Agent "pslave_1" ----->
+
+     Model input files on agent "pslave_1":-
+         ./pslave1/pflotran.in
+
+     Model output files on agent "pslave_1":-
+         ./pslave1/output_processed.txt
+
+     Model command line for agent "pslave_1":-
+         trial.sh
+
+
+ Agent "pslave_2" ----->
+
+     Model input files on agent "pslave_2":-
+         ./pslave2/pflotran.in
+
+     Model output files on agent "pslave_2":-
+         ./pslave2/output_processed.txt
+
+     Model command line for agent "pslave_2":-
+         trial.sh
+
+
+ Agent "pslave_3" ----->
+
+     Model input files on agent "pslave_3":-
+         ./pslave3/pflotran.in
+
+     Model output files on agent "pslave_3":-
+         ./pslave3/output_processed.txt
+
+     Model command line for agent "pslave_3":-
+         trial.sh
+
+
+ AVERAGE WAIT INTERVAL         : 150 hundredths of a second.
+ PARALLELISE LAMBDA SEARCH     : no
+ REPEAT TROUBLESOME MODEL RUNS : yes
+ SLOW RUN DECLARATION FACTOR   : 1.5000
+
+ RUNNING MODEL FOR FIRST TIME  -----> 
+
+ Running model 1 time....
+   18:46:56.54:- agent "pslave_0" commencing model run.
+   18:47: 7.68:- agent "pslave_0" finished execution; reading results.
+
+
+ OPTIMISATION ITERATION NO.  1 ----->
+
+ Calculating Jacobian matrix: running model 1 times .....
+   18:47:10.75:- agent "pslave_0" commencing model run.
+   18:47:20.85:- agent "pslave_0" finished execution; reading results.
+
+ Testing parameter upgrades .....
+   18:47:23.96:- agent "pslave_0" commencing model run.
+   18:47:35.10:- agent "pslave_0" finished execution; reading results.
+
+
+ OPTIMISATION ITERATION NO.  2 ----->
+
+ Calculating Jacobian matrix: running model 1 times .....
+   18:47:38.17:- agent "pslave_0" commencing model run.
+   18:47:48.27:- agent "pslave_0" finished execution; reading results.
+
+ Testing parameter upgrades .....
+   18:47:51.36:- agent "pslave_0" commencing model run.
+   18:48: 2.47:- agent "pslave_0" finished execution; reading results.
+
+
+ OPTIMISATION ITERATION NO.  3 ----->
+
+ Calculating Jacobian matrix: running model 1 times .....
+   18:48: 5.59:- agent "pslave_0" commencing model run.
+   18:48:15.72:- agent "pslave_0" finished execution; reading results.
+
+ Testing parameter upgrades .....
+   18:48:18.82:- agent "pslave_0" commencing model run.
+   18:48:29.93:- agent "pslave_0" finished execution; reading results.
+   18:48:32.98:- agent "pslave_0" commencing model run.
+   18:48:43.08:- agent "pslave_0" finished execution; reading results.
+
+
+ OPTIMISATION ITERATION NO.  4 ----->
+
+ Calculating Jacobian matrix: running model 2 times .....
+   18:48:46.13:- agent "pslave_0" commencing model run.
+   18:48:47.17:- agent "pslave_1" commencing model run.
+   18:48:57.29:- agent "pslave_0" finished execution; reading results.
+   18:49: 2.32:- agent "pslave_1" finished execution; reading results.
+
+ Testing parameter upgrades .....
+   18:49: 5.39:- agent "pslave_2" commencing model run.
+   18:49:15.49:- agent "pslave_2" finished execution; reading results.
+   18:49:18.52:- agent "pslave_2" commencing model run.
+   18:49:29.63:- agent "pslave_2" finished execution; reading results.
+
+
+ OPTIMISATION ITERATION NO.  5 ----->
+
+ Calculating Jacobian matrix: running model 2 times .....
+   18:49:32.70:- agent "pslave_2" commencing model run.
+   18:49:33.75:- agent "pslave_3" commencing model run.
+   18:49:43.85:- agent "pslave_2" finished execution; reading results.
+   18:49:48.88:- agent "pslave_3" finished execution; reading results.
+
+ Testing parameter upgrades .....
+   18:49:51.92:- agent "pslave_2" commencing model run.
+   18:50: 3.05:- agent "pslave_2" finished execution; reading results.
+   18:50: 6.07:- agent "pslave_2" commencing model run.
+   18:50:16.21:- agent "pslave_2" finished execution; reading results.
+
+ RUNNING MODEL ONE LAST TIME WITH BEST PARAMETERS  -----> 
+   18:50:19.28:- agent "pslave_2" commencing model run.
+   18:50:30.38:- agent "pslave_2" finished execution; reading results.
