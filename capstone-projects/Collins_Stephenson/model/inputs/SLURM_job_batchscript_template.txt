@@ -18,7 +18,7 @@ module use -a /uufs/chpc.utah.edu/common/home/shuai-group1/modulefiles
 module load pflotran
 
 #change into run directory
-cd /scratch/general/nfs1/pshuai/ats-workflow/model/2-spinup_cyclic
+cd /scratch/general/nfs1/collins_s/PFLOTRAN/model
 
 #launch ats. Make sure xml file can be found.
 mpirun -np 16 ats --xml_file=../inputs/CoalCreek_spinup_cyclic.xml
