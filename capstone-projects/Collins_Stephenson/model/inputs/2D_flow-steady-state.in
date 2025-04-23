@@ -26,7 +26,7 @@ END
 #=========================== discretization ===================================
 GRID
   TYPE STRUCTURED
-  NXYZ 222 1 61  # start with fairly coarse mesh for first run - 13,542 cells
+  NXYZ 222 1 30  # start with fairly coarse mesh for first run - 6,660 cells
   BOUNDS
     0.d0 0.d0 0.d0
     222.d0 1.d0 6.1d0   # modeling domain for Transect A: 222 m long by 1 m wide by 6.1 m deep
@@ -42,7 +42,7 @@ MATERIAL_PROPERTY soil1   # assuming homogenous isotropic aquifer, may add more 
   /
 END
 
-#=========================== characteristic curves ============================ STILL NEED TO UPDATE
+#=========================== characteristic curves ============================
 CHARACTERISTIC_CURVES default  
   SATURATION_FUNCTION VAN_GENUCHTEN
     ALPHA 1.d-4
@@ -54,7 +54,7 @@ CHARACTERISTIC_CURVES default
     LIQUID_RESIDUAL_SATURATION 0.1d0
   /
 END
-#=========================== output options =================================== STILL NEED TO UPDATE
+#=========================== output options ===================================
 OUTPUT
   SNAPSHOT_FILE
     FORMAT HDF5
@@ -64,7 +64,7 @@ OUTPUT
   /
   VARIABLES
     LIQUID_PRESSURE
-    6.1UID_SATURATION
+    LIQUID_SATURATION
   /
 END
 
@@ -75,7 +75,7 @@ TIME
   MAXIMUM_TIMESTEP_SIZE 1.d0 y
 END
 
-#=========================== regions ========================================== STILL NEED TO UPDATE
+#=========================== regions ==========================================
 REGION all
   COORDINATES
     0.d0 0.d0 0.d0
@@ -133,18 +133,20 @@ END
 
 FLOW_CONDITION west
   TYPE
-    LIQUID_PRESSURE HYDROSTATIC
+    LIQUID_PRESSURE CONDUCTANCE
   /
-  DATUM 0.d0 0.5 3.d0
+  DATUM 0.d0 0.5 5.26d0		 # used elevation of HBSFC water surface from 02/07/2025 survey
   LIQUID_PRESSURE 101325.d0
+  CONDUCTANCE 1.d-13     # conductance = boundary permeability / thickness of soil interface ---> (10^-14 m^2) / (0.1 m)
 END
 
 FLOW_CONDITION east
   TYPE
-    LIQUID_PRESSURE HYDROSTATIC
+    LIQUID_PRESSURE CONDUCTANCE
   /
-  DATUM 100.d0 0.5 1.d0
+  DATUM 100.d0 0.5 1.89d0
   LIQUID_PRESSURE 101325.d0
+  CONDUCTANCE 1.d-13     # conductance = boundary permeability / thickness of soil interface ---> (10^-14 m^2) / (0.1 m) 
 END
 
 #=========================== condition couplers ===============================
@@ -173,6 +175,5 @@ STRATA
   REGION all
   MATERIAL soil1
 END
-
 
 END_SUBSURFACE
