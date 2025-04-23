@@ -1,6 +1,0 @@
-# Specifies a transient datum.
-TIME_UNITS d
-DATA_UNITS m
-# <time> <value> <value> <value>
-0    222   0.5   1.89
-30   222   0.5   1.89
