@@ -138,7 +138,8 @@ FLOW_CONDITION west
   CONDUCTANCE 1.d-13     # conductance = boundary permeability / thickness of soil interface ---> (10^-14 m^2) / (0.1 m)
   DATUM 
 	UNITS m
-	COORDINATES 0.d0 0.5d0 5.26d0		 # used elevation of HBSFC water surface from 02/07/2025 survey
+	COORDINATES 0.d0 0.5d0 5.26d0		 
+	# used elevation of HBSFC water surface from 02/07/2025 survey
   END
   LIQUID_PRESSURE 101325.d0
 END
