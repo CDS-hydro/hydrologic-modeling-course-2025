@@ -1,0 +1,6 @@
+# Specifies a steady datum.
+TIME_UNITS d
+DATA_UNITS m
+# <time> <value> <value> <value>
+0     0   0.5   0
+60    0   0.5   0

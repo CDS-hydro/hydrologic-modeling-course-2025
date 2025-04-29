@@ -1,0 +1,181 @@
+#Description: 2D RICHARDS  mode sloping water table between Hyrum and Nibley Blacksmith Fork Canals and the Blacksmith Fork River
+
+SIMULATION
+  SIMULATION_TYPE SUBSURFACE
+  PROCESS_MODELS
+    SUBSURFACE_FLOW flow
+      MODE RICHARDS  # change to Thermal-Hydrologic when ready for flow and energy conservation (temperature) model
+    /
+  /
+  CHECKPOINT
+    FORMAT HDF5
+  /  
+END
+
+SUBSURFACE
+
+#=========================== numerical methods ================================
+NUMERICAL_METHODS FLOW
+
+  NEWTON_SOLVER
+#    USE_INFINITY_NORM_CONVERGENCE
+  /
+
+END
+
+#=========================== discretization ===================================
+GRID
+  TYPE STRUCTURED
+  NXYZ 222 1 30  # start with fairly coarse mesh for first run - 6,660 cells
+  BOUNDS
+    0.d0 0.d0 0.d0
+    222.d0 1.d0 6.1d0   # modeling domain for Transect A: 222 m long by 1 m wide by 6.1 m deep
+  /
+END
+#=========================== material properties ==============================
+MATERIAL_PROPERTY soil1   # assuming homogenous isotropic aquifer, may add more soil types for research model
+  ID 1
+  CHARACTERISTIC_CURVES default
+  POROSITY 0.30   # value comes from recommended porosity range for coarse sands and gravels (Table 2 - Woessner and Poeter, 2020)
+  PERMEABILITY
+    PERM_ISO 10.d-10   # m^2, value comes from recommended permeability ranges for clean sands and gravel (Figure 32 - Woessner and Poeter, 2020)  
+  /
+END
+
+#=========================== characteristic curves ============================
+CHARACTERISTIC_CURVES default  
+  SATURATION_FUNCTION VAN_GENUCHTEN
+    ALPHA 1.d-4
+    M 0.5d0
+    LIQUID_RESIDUAL_SATURATION 0.1d0
+  /
+  PERMEABILITY_FUNCTION MUALEM_VG_LIQ
+    M 0.5d0
+    LIQUID_RESIDUAL_SATURATION 0.1d0
+  /
+END
+#=========================== output options ===================================
+OUTPUT
+  SNAPSHOT_FILE
+    FORMAT HDF5
+    PERIODIC TIME 10. d between 0. y and 1. y
+    PERIODIC TIME 100. d between 1. y and 2. y
+    PERIODIC TIME 365. d between 2. y and 200. y
+  /
+  VARIABLES
+    LIQUID_PRESSURE
+    LIQUID_SATURATION
+  /
+END
+
+#=========================== times ============================================
+TIME
+  FINAL_TIME 200.d0 y   # should be sufficient time for model to converge
+  INITIAL_TIMESTEP_SIZE 1.d0 h
+  MAXIMUM_TIMESTEP_SIZE 1.d0 y
+END
+
+#=========================== regions ==========================================
+REGION all
+  COORDINATES
+    0.d0 0.d0 0.d0
+    222.d0 1.d0 6.1d0   # set to the domain of the model mesh
+  /
+END
+
+REGION top   # top of modeling domain; ground surface
+  FACE TOP
+  COORDINATES
+    0.d0 0.d0 6.1d0
+    222.d0 1.d0 6.1d0
+  /
+END
+
+REGION bottom   # bottom of modeling domain; impermeable layer
+  FACE BOTTOM
+  COORDINATES
+    0.d0 0.d0 0.d0
+    222.d0 1.d0 0.d0
+  /
+END
+
+REGION east   # river boundary (Blacksmith Fork River)
+  FACE EAST
+  COORDINATES
+    222.d0 0.d0 0.d0
+    222.d0 1.d0 6.1d0    # there is a 4.21m head difference between HBSFC water surface and BSFR water surface
+  /
+END
+
+REGION west   # canal boundary (HBSF canal)
+  FACE WEST
+  COORDINATES
+    0.d0 0.d0 0.d0
+    0.d0 1.d0 6.1d0    #   # there is a 4.21m head difference between HBSFC water surface and BSFR water surface
+  /
+END
+
+#=========================== flow conditions ==================================
+FLOW_CONDITION initial   # initialize groundwater table
+  TYPE
+    LIQUID_PRESSURE HYDROSTATIC   # arbitrary groundwater table level; using steady state spinup to initialize water table for transient model run
+  /
+  DATUM 0.d0 0.d0 2.d0
+  LIQUID_PRESSURE 101325.d0   # atmospheric pressure
+END
+
+FLOW_CONDITION recharge   # I'm not sure if this condition needs to be in the slide deck; set to 0.0 for now
+  TYPE
+    LIQUID_FLUX NEUMANN
+  /
+  LIQUID_FLUX 0.d0 cm/y
+END
+
+FLOW_CONDITION west
+  TYPE
+    LIQUID_PRESSURE CONDUCTANCE
+  /
+  CONDUCTANCE 1.d-13    # conductance - boundary permeability/thickness of soil interface->(10^-14 m^2) /(0.1 m)
+  CYCLIC
+  DATUM FILE ./HBSFC_stage.txt
+  LIQUID_PRESSURE 101325.d0
+END
+
+FLOW_CONDITION east
+  TYPE
+    LIQUID_PRESSURE CONDUCTANCE
+  /
+  CONDUCTANCE 1.d-13
+  CYCLIC
+  DATUM FILE ./BSFR_stage.txt
+  LIQUID_PRESSURE 101325.d0
+END
+
+#=========================== condition couplers ===============================
+INITIAL_CONDITION
+  FLOW_CONDITION initial
+  REGION all
+END
+
+BOUNDARY_CONDITION top
+  FLOW_CONDITION recharge
+  REGION top
+END
+
+BOUNDARY_CONDITION east
+  FLOW_CONDITION east
+  REGION east
+END
+
+BOUNDARY_CONDITION west
+  FLOW_CONDITION west
+  REGION west
+END
+
+#=========================== stratigraphy couplers ============================
+STRATA
+  REGION all
+  MATERIAL soil1
+END
+
+END_SUBSURFACE

@@ -1,0 +1,307 @@
+
+=================
+  PFLOTRAN v6.0
+=================
+
+"grid_structured_type" set to default value.
+pflotran card:: NUMERICAL_METHODS
+pflotran card:: NUMERICAL_METHODS
+pflotran card:: CHEMISTRY
+pflotran card:: GRID
+pflotran card:: FLUID_PROPERTY
+"FLUID_PROPERTY,diffusion_coefficient units" set to default value.
+pflotran card:: MATERIAL_PROPERTY
+  Name :: soil1
+pflotran card:: CHARACTERISTIC_CURVES
+  Name :: default
+ WARNING: Mualem-van Genuchten relative permeability function is being used without SMOOTH option.
+pflotran card:: OUTPUT
+"OUTPUT,SNAPSHOT_FILE,FORMAT,HDF5" set to default value.
+pflotran card:: TIME
+pflotran card:: REGION
+all
+pflotran card:: REGION
+top
+pflotran card:: REGION
+bottom
+pflotran card:: REGION
+east
+pflotran card:: REGION
+west
+pflotran card:: REGION
+east_up
+pflotran card:: REGION
+river
+pflotran card:: FLOW_CONDITION
+initial
+pflotran card:: FLOW_CONDITION
+west
+pflotran card:: FLOW_CONDITION
+east
+pflotran card:: TRANSPORT_CONDITION
+initial
+pflotran card:: TRANSPORT_CONDITION
+canal
+pflotran card:: CONSTRAINT
+initial
+Constraint Species: Tracer
+pflotran card:: CONSTRAINT
+canal
+Constraint Species: Tracer
+pflotran card:: INITIAL_CONDITION
+"Initial Condition name" set to default value.
+pflotran card:: BOUNDARY_CONDITION
+pflotran card:: BOUNDARY_CONDITION
+pflotran card:: BOUNDARY_CONDITION
+pflotran card:: STRATA
+pflotran card:: END_SUBSURFACE
+--------------------------------------------------------------------------------
+
+     1  Primary Species
+
+              Tracer              
+
+     0  Secondary Complex Species
+
+
+
+     0  Active Gas Species
+
+
+
+     0  Passive Gas Species
+
+
+
+     0  Reference Minerals
+
+
+
+     0  Kinetic Mineral Reactions
+
+
+
+     0  Ion Exchange Reactions
+
+     0  Ion Exchange Cations
+--------------------------------------------------------------------------------
+
+Process Decomposition
+
+Extent of Gridded Domain
+ X: 0.000000E+00 - 2.220000E+02
+ Y: 0.000000E+00 - 1.000000E+00
+ Z: 0.000000E+00 - 6.200000E+00
+
+Size of Gridded Domain
+ Number of grid cells: 6882
+ Maximum number of grid cells per process: 868
+ Minimum number of grid cells per process: 837
+
+Number of active grid cells: 6882
+Number of inactive grid cells: 0
+
+  Setting up TRAN Realization
+  Finished setting up TRAN Realization
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Initial Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   initial
+     Transport Condition:   initial
+                  Region:   all
+--------------------------------------------------------------------------------
+
+  Flow Condition: initial
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  3
+
+    Sub Condition: pressure
+      Type: hydrostatic
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+  Transport Condition: initial
+
+  Constraint: initial
+
+  species       molality
+  Tracer        1.0028E-10
+
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   east
+     Transport Condition:   initial
+                  Region:   east_up
+--------------------------------------------------------------------------------
+
+  Flow Condition: east
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Filename: ./BSFR_stage.txt
+          Is transient?: yes
+          Number of times:      2
+          Is cyclic?: yes
+          Buffer:
+            Rank:  2
+            Dims:    3   2
+            Buffer Slice Size:   0
+          Array Rank:  3
+
+    Sub Condition: pressure
+      Type: conductance
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+  Transport Condition: initial
+
+  Constraint: initial
+
+  species       molality
+  Tracer        1.0028E-10
+
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   east
+     Transport Condition:   initial
+                  Region:   river
+--------------------------------------------------------------------------------
+
+  Flow Condition: east
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Filename: ./BSFR_stage.txt
+          Is transient?: yes
+          Number of times:      2
+          Is cyclic?: yes
+          Buffer:
+            Rank:  2
+            Dims:    3   2
+            Buffer Slice Size:   0
+          Array Rank:  3
+
+    Sub Condition: pressure
+      Type: conductance
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+  Transport Condition: initial
+
+  Constraint: initial
+
+  species       molality
+  Tracer        1.0028E-10
+
+
+--------------------------------------------------------------------------------
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
+
+  Boundary Condition
+
+--------------------------------------------------------------------------------
+          Flow Condition:   west
+     Transport Condition:   canal
+                  Region:   west
+--------------------------------------------------------------------------------
+
+  Flow Condition: west
+    Synchronize time with update: no
+    Time units: yr
+    Length units: m
+      Datum:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Filename: ./no_seepage.txt
+          Is transient?: yes
+          Number of times:      2
+          Is cyclic?: yes
+          Buffer:
+            Rank:  2
+            Dims:    3   2
+            Buffer Slice Size:   0
+          Array Rank:  3
+
+    Sub Condition: pressure
+      Type: conductance
+      Gradient:
+      Data:
+        Dataset: Unnamed Ascii Dataset
+          Type: dataset_ascii_type
+          Transient: no
+          Array Rank:  1
+
+--------------------------------------------------------------------------------
+
+  Transport Condition: canal
+
+  Constraint: initial
+
+  species       molality
+  Tracer        1.0028E-10
+
+
+--------------------------------------------------------------------------------
+Default HDF5 method is used in Initialization
+  Beginning setup of FLOW SNES
+ number of dofs =   1, number of phases =   1
+ mode = Richards: p
+  Finished setting up FLOW SNES
+mode = Reactive Transport
+  Beginning setup of TRAN SNES
+  Finished setting up TRAN SNES
+
+ Requested processors and decomposition =     8, npx,y,z=   -1  -1  -1
+ Actual decomposition: npx,y,z=    8   1   1
+
+Restarting with checkpoint file "2D_flow-steady-state-restart.h5".
+
+ERROR: HDF5 Group "PMCSubsurfaceTransport" not found.
+
+Stopping!
